@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jessica Pelegio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf6ee;
+    --card:#f7efe2;
+    --card-2:#f0e2ce;
+    --gold:#c9a961;
+    --bordeaux:#6b2737;
+    --ink:#211c19;
+    --blush:#f0dcc8;
+    --muted:#7d7368;
+    --serif:'Fraunces', serif;
+    --body:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold);color:var(--ink);}
+  .wrap{max-width:760px;margin:0 auto;padding:0 28px;}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(251,246,238,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--blush);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;}
+  .nav-id{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--bordeaux);}
+  .nav-links{display:flex;gap:26px;font-family:var(--mono);font-size:12px;}
+  .nav-links a{color:var(--muted);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;}
+  .nav-links a:hover{color:var(--bordeaux);}
+
+  header.hero{padding:64px 0 40px;}
+  .label{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--bordeaux);margin-bottom:14px;}
+  h1.title{font-family:var(--serif);font-weight:500;font-size:clamp(32px,5.5vw,52px);line-height:1.12;margin:0 0 22px;letter-spacing:-0.01em;}
+  h1.title i{font-style:italic;color:var(--bordeaux);}
+  .sub{font-size:16.5px;color:#4a423b;max-width:540px;margin:0 0 28px;}
+  .rule{display:flex;align-items:center;gap:10px;margin:8px 0 26px;}
+  .rule .line{flex:1;height:1px;background:var(--gold);}
+  .rule .dots{display:flex;gap:5px;}
+  .rule .dots span{width:4px;height:4px;border-radius:50%;background:var(--gold);}
+  .stampline{display:flex;flex-wrap:wrap;gap:0;font-family:var(--mono);font-size:12.5px;}
+  .stampline span{padding:10px 22px 10px 0;margin-right:22px;border-right:1px solid var(--blush);}
+  .stampline span:last-child{border-right:none;margin-right:0;}
+  .stampline b{display:block;font-family:var(--serif);font-size:19px;font-weight:500;color:var(--bordeaux);}
+  .hero-actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{font-family:var(--mono);font-size:12.5px;padding:11px 22px;border-radius:2px;text-decoration:none;letter-spacing:0.03em;border:1px solid var(--gold);color:var(--ink);transition:all .15s ease;}
+  .btn.primary{background:var(--bordeaux);border-color:var(--bordeaux);color:var(--cream);font-weight:500;}
+  .btn.primary:hover{background:#7e2f41;}
+  .btn:not(.primary):hover{background:var(--blush);}
+
+  section.section{padding:52px 0;border-top:1px solid var(--blush);}
+  .section-label{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;}
+  .section-title{font-family:var(--serif);font-size:27px;font-weight:500;margin:0 0 26px;color:var(--ink);}
+
+  .bio p{font-size:15.5px;color:#3d3630;max-width:600px;}
+  .bio p + p{margin-top:14px;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--gold);color:var(--bordeaux);padding:6px 14px;border-radius:2px;}
+
+  /* RESUME / CHANGELOG */
+  .entry{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--blush);}
+  .entry:first-of-type{border-top:none;}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--bordeaux);align-self:start;padding-top:3px;}
+  .tag .range{display:block;color:var(--muted);margin-top:4px;font-size:11.5px;}
+  .role{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);margin:0 0 2px;}
+  .org{font-size:13px;color:var(--muted);margin:0 0 12px;font-family:var(--mono);}
+  .entry ul{margin:0;padding-left:18px;color:#4a423b;font-size:14.5px;}
+  .entry li{margin-bottom:8px;}
+  .entry li::marker{color:var(--gold);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  @media (max-width:640px){.grid2{grid-template-columns:1fr;} .entry{grid-template-columns:1fr;gap:8px;} .factgrid{grid-template-columns:1fr !important;}}
+
+  /* HAPPY HOUR */
+  .factgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .fact-card{background:var(--card);border:1px solid var(--blush);border-radius:4px;padding:20px 22px;}
+  .fact-card .fnum{font-family:var(--serif);font-size:28px;color:var(--bordeaux);font-weight:500;line-height:1;margin-bottom:8px;display:block;}
+  .fact-card .flabel{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:0.03em;}
+  .fact-card.wide{grid-column:1 / -1;display:flex;align-items:center;gap:16px;}
+  .fact-card.wide .flabel{font-size:14.5px;color:#4a423b;font-family:var(--body);}
+  .edu-item{margin-bottom:18px;}
+  .edu-item .deg{font-family:var(--serif);font-size:15.5px;color:var(--ink);font-weight:500;}
+  .edu-item .sch{font-family:var(--mono);font-size:12px;color:var(--bordeaux);margin:2px 0;}
+  .edu-item .note{font-size:13px;color:var(--muted);}
+
+  /* SOMMELIER / CHAT */
+  .console{background:var(--card);border:1px solid var(--blush);border-radius:4px;overflow:hidden;}
+  .console-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--blush);background:var(--card-2);}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--blush);}
+  .dot:nth-child(1){background:var(--bordeaux);}
+  .dot:nth-child(2){background:var(--gold);}
+  .console-title{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-left:6px;}
+  .console-body{padding:20px;min-height:120px;max-height:420px;overflow-y:auto;}
+  .msg{font-size:14.5px;margin-bottom:18px;white-space:pre-wrap;}
+  .msg .who{font-family:var(--mono);color:var(--bordeaux);margin-right:8px;font-size:12.5px;}
+  .msg.user .who{color:var(--muted);}
+  .msg .body-text{color:var(--ink);line-height:1.65;}
+  .msg.user .body-text{color:var(--muted);font-family:var(--mono);font-size:13.5px;}
+  .msg.gate .body-text{color:var(--bordeaux);font-weight:500;}
+  .prompts{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 16px;}
+  .prompt-chip{font-family:var(--mono);font-size:11.5px;color:var(--bordeaux);border:1px solid var(--gold);padding:7px 13px;border-radius:20px;cursor:pointer;background:none;transition:all .15s ease;}
+  .prompt-chip:hover{background:var(--blush);}
+  .console-input{display:flex;border-top:1px solid var(--blush);}
+  .console-input input{flex:1;background:transparent;border:none;outline:none;padding:15px 16px;color:var(--ink);font-family:var(--body);font-size:14px;}
+  .console-input input::placeholder{color:#b8a99a;}
+  .console-input button{background:var(--bordeaux);border:none;color:var(--cream);font-family:var(--mono);font-size:12px;font-weight:600;padding:0 22px;cursor:pointer;letter-spacing:0.03em;}
+  .console-input button:disabled{background:#d8c4b0;cursor:default;}
+  .gate-actions{padding:0 20px 20px;}
+  .gate-actions .btn{display:inline-block;}
+
+  footer{padding:36px 0;text-align:center;}
+  footer .wrap{display:flex;flex-direction:column;gap:8px;align-items:center;}
+  footer a{color:var(--bordeaux);text-decoration:none;font-family:var(--mono);font-size:13px;}
+  footer .copy{font-family:var(--mono);font-size:11px;color:#c2b3a4;margin-top:6px;}
+
+  @media (max-width:640px){
+    .statline{flex-direction:column;}
+    .stampline span{border-right:none;border-bottom:1px solid var(--blush);padding:8px 0;margin-right:0;}
+    .stampline span:last-child{border-bottom:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-id">Jessica Pelegio</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#happyhour">Happy Hour</a>
+      <a href="#sommelier">Ask the Sommelier</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="label" style="letter-spacing:0.02em;line-height:1.6;text-transform:none;">Head of Technical Program Management @ Google · AI & Org Transformation at Billion-User Scale · Strategic Execution & Cross-Functional Leadership Across 3,000+ Person Orgs · NYU Professor</div>
+    <h1 class="title">Driving the next era of <i>intelligent execution.</i></h1>
+    <p class="sub">From turning zero-to-one ambiguity into enterprise reality to leading Technical Program Management for Agentic AI in Google Workspace, Jessica Pelegio operates where strategy becomes execution. She teaches the next generation of tech leaders at NYU and brings that same sharp, curious eye to exploring fine champagne and global culture.</p>
+    <div class="rule"><div class="line"></div><div class="dots"><span></span><span></span><span></span></div><div class="line"></div></div>
+    <div class="hero-actions">
+      <a href="#sommelier" class="btn primary">Ask the Sommelier →</a>
+      <a href="https://linkedin.com/in/jessicapelegio" target="_blank" class="btn">LinkedIn ↗</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Bio</h2>
+    <div class="bio">
+      <p>Jessica Pelegio builds and scales the operational engines that turn cutting-edge AI innovation into enterprise-grade reality. As Head of Technical Program Management for Agentic AI in Google Workspace, she leads the technical orchestration, cross-functional delivery, and operational strategy for the autonomous systems transforming how hundreds of millions of people work.</p>
+      <p>A 15-year Google veteran, Jessica thrives at the exact intersection of high-level strategy, technical execution, and high-stakes decision-making. She has a proven track record of taking zero-to-one ambiguous technologies and building the frameworks, systems, and global teams required to operate them at scale — from driving organizational alignment across 3,000+ people to steering multi-million-dollar programs under intense market pressure.</p>
+      <p>Complementing her corporate leadership, Jessica is an Adjunct Professor at NYU, where she teaches Management Skills for Technology Professionals — equipping the next generation of executives with battle-tested frameworks for operating under complexity. Fluent in five languages with leadership experience spanning four continents, she brings a rare, globally informed perspective to scaling complex technical operations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="resume">
+  <div class="wrap">
+    <div class="section-label">Resume</div>
+    <h2 class="section-title">Experience</h2>
+
+    <div class="entry">
+      <div class="tag">2024<span class="range">Dec 2024 — Present</span></div>
+      <div>
+        <p class="role">Head of AI Data Strategy and Operations</p>
+        <p class="org">Google · New York</p>
+        <ul>
+          <li>Architected the foundational data supply chain for Google's GenAI portfolio across 7 flagship products, establishing governance to process 1.5M+ privacy-compliant records</li>
+          <li>Managed Google Workspace's global partner ecosystem for ethical data procurement</li>
+          <li>Eliminated millions in annual third-party synthetic data spend by building internal, privacy-first pipelines; improved model evaluation scores 10–20% through higher-quality human data</li>
+          <li>Directed market entry of Workspace Studios automation agents, using specialized partner data to calibrate core AI skill output quality; defined executive delivery strategy for Google Cloud Next and I/O 2026</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="tag">2021<span class="range">May 2021 — Dec 2024</span></div>
+      <div>
+        <p class="role">Head of PMO, Google Drive</p>
+        <p class="org">Google · New York</p>
+        <ul>
+          <li>Served on the Drive product leadership team alongside Engineering and Product directors and UX leads, co-owning annual planning, org OKRs, and resourcing priorities</li>
+          <li>Led the Drive TPM function and operating cadence for a ~400-person engineering organization; managed and mentored up to 8 TPMs across ~30 concurrent initiatives per year</li>
+          <li>Built Drive's portfolio operating system — planning rhythms, delivery standards, reporting, escalation paths — improving launch velocity 55%, saving leadership 300+ meeting hours, and doubling project capacity without headcount growth</li>
+          <li>Primary technical point of contact during critical releases, coordinating war rooms and go/no-go deployment decisions under aggressive timelines</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="tag">2020<span class="range">Jun 2020 — May 2021</span></div>
+      <div>
+        <p class="role">Senior Program Manager</p>
+        <p class="org">Google Cloud</p>
+        <ul>
+          <li>Built financial models for people and hiring costs; presented ROI analyses directly to the Google Cloud CEO, driving hundreds of millions in P&L savings</li>
+          <li>Designed and implemented 25+ strategic initiatives impacting 40K+ employees, in partnership with consulting, finance, and data analytics teams</li>
+          <li>Created executive communication strategies and success-tracking systems for HRBP and Engineering VPs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="tag">2016<span class="range">Jun 2016 — Jun 2020</span></div>
+      <div>
+        <p class="role">Program Manager</p>
+        <p class="org">Google Workspace</p>
+        <ul>
+          <li>Owned the "Next Mile" enterprise migration methodology for moving Fortune 500 customers from Microsoft to Google Workspace — now the gold-standard playbook used by Workspace sales and delivery teams</li>
+          <li>Led 14 customers with 50K+ employees through migration, a process that usually takes 18 months</li>
+          <li>Identified and drove resolution of 200+ migration blockers (60 resolved in one year) in partnership with product and engineering</li>
+          <li>Identified enterprise Data Governance as a deal and migration blocker; established a new Data Governance vertical, unlocking $1B+ in contract potential including US Government and EU state-owned entities</li>
+          <li>Led Google Workspace's COVID response, coordinating multi-stakeholder migration of millions of education customers globally in two weeks</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="tag">2014<span class="range">Mar 2014 — Jun 2020</span></div>
+      <div>
+        <p class="role">Product Support Manager</p>
+        <p class="org">Google · Ireland</p>
+        <ul>
+          <li>Owned support strategy for several Google products across hundreds of launches; managed all support channels with 200M+ access and up to 25% contact rate</li>
+          <li>Led a 16+ person cross-functional team internationalizing support strategy across 70+ languages, all of Google's international markets</li>
+          <li>Served as the voice of Google's users across EMEA and LATAM back into product teams</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="tag">2025<span class="range">Jan 2025 — Present</span></div>
+      <div>
+        <p class="role">Adjunct Instructor</p>
+        <p class="org">NYU School of Professional Studies</p>
+        <ul>
+          <li>Teaches graduate-level "Management Skills for Technology Professionals," helping students build real-world skills for technology-driven environments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap grid2">
+    <div>
+      <div class="section-label">Education</div>
+      <h2 class="section-title" style="font-size:20px;">Foundations</h2>
+      <div class="edu-item">
+        <div class="deg">Master's, International Business</div>
+        <div class="sch">Grenoble Graduate School of Business, France — 2010–2012</div>
+        <div class="note">Eiffel Excellence Scholarship, French Ministry for Europe and Foreign Affairs</div>
+      </div>
+      <div class="edu-item">
+        <div class="deg">MBA, Project Management</div>
+        <div class="sch">Fundação Getulio Vargas, Brazil — 2008–2010</div>
+      </div>
+      <div class="edu-item">
+        <div class="deg">BA, International Relations</div>
+        <div class="sch">Fundação Armando Alvares Penteado, Brazil — 2004–2008</div>
+        <div class="note">Teacher assistant, partial scholarship</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Core Competencies</div>
+      <h2 class="section-title" style="font-size:20px;">Skills</h2>
+      <div class="chips">
+        <span class="chip">Enterprise PMO Leadership</span>
+        <span class="chip">Portfolio Governance</span>
+        <span class="chip">AI / GenAI Data Strategy</span>
+        <span class="chip">OKR Planning & Execution</span>
+        <span class="chip">Cross-functional Stakeholder Mgmt</span>
+        <span class="chip">Change Management</span>
+        <span class="chip">Budget & Resource Management</span>
+        <span class="chip">Data Privacy & Compliance</span>
+        <span class="chip">SDLC Management</span>
+        <span class="chip">Vendor Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="happyhour">
+  <div class="wrap">
+    <div class="section-label">Happy Hour</div>
+    <h2 class="section-title">A few things worth knowing</h2>
+    <p style="color:var(--muted);font-size:14.5px;max-width:600px;margin-top:-16px;margin-bottom:24px;">Off the record, but on the record.</p>
+    <div class="factgrid">
+      <div class="fact-card">
+        <span class="fnum">80</span>
+        <span class="flabel">Countries visited</span>
+      </div>
+      <div class="fact-card">
+        <span class="fnum">5</span>
+        <span class="flabel">Languages spoken</span>
+      </div>
+      <div class="fact-card wide">
+        <span class="fnum" style="font-size:22px;">🎓</span>
+        <span class="flabel">Adjunct professor at NYU, teaching graduate students "Management Skills for Technology Professionals"</span>
+      </div>
+      <div class="fact-card wide">
+        <span class="fnum" style="font-size:22px;">🍾</span>
+        <span class="flabel">Certified Champagne specialist, credentialed by Comité Champagne</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sommelier" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-label">Live</div>
+    <h2 class="section-title">Ask the Sommelier</h2>
+    <p style="color:var(--muted);font-size:14.5px;margin-top:-16px;margin-bottom:24px;">She'll pour you the details on her career — ask about a role, a metric, or how her experience fits what you're hiring for.</p>
+
+    <div class="console">
+      <div class="console-bar">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <span class="console-title">tasting room</span>
+      </div>
+      <div class="console-body" id="consoleBody">
+        <div class="msg"><span class="who">sommelier</span><span class="body-text">Ask anything about Jessica's career — why she moved from Support into Program Management, what she actually did during the Drive TPM years, or what makes her tick.</span></div>
+      </div>
+      <div class="prompts" id="promptsRow">
+        <button class="prompt-chip" data-q="What's her biggest quantifiable win?">Biggest quantifiable win?</button>
+        <button class="prompt-chip" data-q="How does her background map to a Director of TPM role?">Maps to Director of TPM?</button>
+        <button class="prompt-chip" data-q="What languages does she speak and where has she worked?">Languages & continents?</button>
+      </div>
+      <div class="console-input" id="consoleInputRow">
+        <input type="text" id="chatInput" placeholder="Type a question and press enter…" autocomplete="off">
+        <button id="sendBtn">ASK</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://linkedin.com/in/jessicapelegio" target="_blank">linkedin.com/in/jessicapelegio ↗</a>
+    <div class="copy">Built from the actual record, not a summary of it.</div>
+  </div>
+</footer>
+
+<script>
+// Chat: sends only conversation turns to /api/chat. The resume knowledge
+// base and system prompt live server-side in api/chat.js.
+
+const consoleBody = document.getElementById('consoleBody');
+const input = document.getElementById('chatInput');
+const sendBtn = document.getElementById('sendBtn');
+const inputRow = document.getElementById('consoleInputRow');
+const promptsRow = document.getElementById('promptsRow');
+let history = [];
+let userQuestionCount = 0;
+let busy = false;
+let gated = false;
+
+const QUESTION_LIMIT = 3;
+const LINKEDIN_URL = 'https://linkedin.com/in/jessicapelegio';
+
+function addMessage(role, text, opts){
+  opts = opts || {};
+  const div = document.createElement('div');
+  div.className = 'msg' + (role === 'user' ? ' user' : '') + (opts.gate ? ' gate' : '');
+  const who = role === 'user' ? 'you' : 'sommelier';
+  div.innerHTML = `<span class="who">${who}</span><span class="body-text"></span>`;
+  div.querySelector('.body-text').textContent = text;
+  consoleBody.appendChild(div);
+  consoleBody.scrollTop = consoleBody.scrollHeight;
+  return div.querySelector('.body-text');
+}
+
+function showGate(){
+  gated = true;
+  addMessage(
+    'assistant',
+    "Woah — it seems like you're really interested in Jessica! For more than a few questions, the best place to continue is LinkedIn.",
+    { gate: true }
+  );
+  inputRow.innerHTML = '';
+  promptsRow.innerHTML = '';
+  const gateActions = document.createElement('div');
+  gateActions.className = 'gate-actions';
+  gateActions.innerHTML = `<a class="btn primary" href="${LINKEDIN_URL}" target="_blank">Connect on LinkedIn →</a>`;
+  consoleBody.parentElement.appendChild(gateActions);
+  consoleBody.scrollTop = consoleBody.scrollHeight;
+}
+
+async function ask(question){
+  if(!question.trim() || busy || gated) return;
+
+  if(userQuestionCount >= QUESTION_LIMIT){
+    showGate();
+    return;
+  }
+
+  busy = true;
+  sendBtn.disabled = true;
+  input.value = '';
+  addMessage('user', question);
+  userQuestionCount += 1;
+  history.push({role:'user', content: question});
+  const respEl = addMessage('assistant', 'thinking…');
+
+  try{
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history })
+    });
+    const data = await response.json();
+    const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text);
+    const answer = textBlocks.join('\n').trim() || "I couldn't find that in the record — try connecting with Jessica on LinkedIn instead.";
+    respEl.textContent = answer;
+    history.push({role:'assistant', content: answer});
+  }catch(err){
+    respEl.textContent = "Something went wrong. Please try again.";
+    console.error(err);
+  }finally{
+    busy = false;
+    if(sendBtn) sendBtn.disabled = false;
+    consoleBody.scrollTop = consoleBody.scrollHeight;
+
+    if(userQuestionCount >= QUESTION_LIMIT && !gated){
+      setTimeout(showGate, 600);
+    }
+  }
+}
+
+sendBtn.addEventListener('click', () => ask(input.value));
+input.addEventListener('keydown', (e) => { if(e.key === 'Enter') ask(input.value); });
+document.querySelectorAll('.prompt-chip').forEach(chip => {
+  chip.addEventListener('click', () => ask(chip.getAttribute('data-q')));
+});
+</script>
+
+</body>
+</html>
